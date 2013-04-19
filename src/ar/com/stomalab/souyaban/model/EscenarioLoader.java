@@ -10,8 +10,9 @@ public class EscenarioLoader {
 		int fila = 0;
 		
 		for (String linea : lineas){
-			for (int columna = 0; columna < linea.length(); columna++){
-			    char c = linea.charAt(columna);        
+			fila++;
+			for (int columna = 1; columna <= linea.length(); columna++){
+			    char c = linea.charAt(columna - 1);        
 			    switch (c){
 			    case '#':
 			    {
@@ -67,7 +68,6 @@ public class EscenarioLoader {
 			    }
 			    
 			}
-			fila++;
 		}
 		return escenario;
 	}
