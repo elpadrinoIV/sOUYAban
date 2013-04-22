@@ -9,3 +9,6 @@ bin/
 gen/
 
 local.properties
+
+*.log
+
