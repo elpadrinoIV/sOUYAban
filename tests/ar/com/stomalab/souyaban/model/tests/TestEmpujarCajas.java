@@ -144,4 +144,244 @@ public class TestEmpujarCajas extends TestCase {
 	    assertEquals("el tipito no se tiene que mover en x", x_original_persona, x_nuevo_persona);
 	    assertEquals("el tipito no se movio abajo", y_original_persona + 1, y_nuevo_persona);
 	}
+	
+	@Test
+	public void test05A05EmpujarCajaIzquierdaOcupadoConPared(){
+		Caja caja = new Caja(2, 3);
+		this.escenario.agregarCaja(caja);
+		caja.setEscenario(this.escenario);
+		
+		Persona persona = new Persona(3, 3);
+		persona.setEscenario(this.escenario);
+			    
+	    int x_original_caja = caja.getX();
+	    int y_original_caja = caja.getY();
+	    int x_original_persona = persona.getX();
+	    int y_original_persona = persona.getY();
+	    persona.moverIzquierda();
+	    int x_nuevo_caja = caja.getX();
+	    int y_nuevo_caja = caja.getY();
+	    int x_nuevo_persona = persona.getX();
+	    int y_nuevo_persona = persona.getY();
+
+	    assertEquals("la caja no se tiene que mover en x", x_original_caja, x_nuevo_caja);
+	    assertEquals("la caja no se tiene que mover en y", y_original_caja, y_nuevo_caja);
+	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
+	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	}
+	
+	@Test
+	public void test05A06EmpujarCajaDerechaOcupadoConPared(){
+		Caja caja = new Caja(5, 3);
+		this.escenario.agregarCaja(caja);
+		caja.setEscenario(this.escenario);
+		
+		Persona persona = new Persona(4, 3);
+		persona.setEscenario(this.escenario);
+			    
+	    int x_original_caja = caja.getX();
+	    int y_original_caja = caja.getY();
+	    int x_original_persona = persona.getX();
+	    int y_original_persona = persona.getY();
+	    persona.moverDerecha();
+	    int x_nuevo_caja = caja.getX();
+	    int y_nuevo_caja = caja.getY();
+	    int x_nuevo_persona = persona.getX();
+	    int y_nuevo_persona = persona.getY();
+
+	    assertEquals("la caja no se tiene que mover en x", x_original_caja, x_nuevo_caja);
+	    assertEquals("la caja no se tiene que mover en y", y_original_caja, y_nuevo_caja);
+	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
+	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	}
+	
+	@Test
+	public void test05A07EmpujarCajaArribaOcupadoConPared(){
+		Caja caja = new Caja(3, 2);
+		this.escenario.agregarCaja(caja);
+		caja.setEscenario(this.escenario);
+		
+		Persona persona = new Persona(3, 3);
+		persona.setEscenario(this.escenario);
+			    
+	    int x_original_caja = caja.getX();
+	    int y_original_caja = caja.getY();
+	    int x_original_persona = persona.getX();
+	    int y_original_persona = persona.getY();
+	    persona.moverArriba();
+	    int x_nuevo_caja = caja.getX();
+	    int y_nuevo_caja = caja.getY();
+	    int x_nuevo_persona = persona.getX();
+	    int y_nuevo_persona = persona.getY();
+
+	    assertEquals("la caja no se tiene que mover en x", x_original_caja, x_nuevo_caja);
+	    assertEquals("la caja no se tiene que mover en y", y_original_caja, y_nuevo_caja);
+	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
+	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	}
+	
+	@Test
+	public void test05A08EmpujarCajaAbajoOcupadoConPared(){
+		Caja caja = new Caja(3, 5);
+		this.escenario.agregarCaja(caja);
+		caja.setEscenario(this.escenario);
+		
+		Persona persona = new Persona(3, 4);
+		persona.setEscenario(this.escenario);
+			    
+	    int x_original_caja = caja.getX();
+	    int y_original_caja = caja.getY();
+	    int x_original_persona = persona.getX();
+	    int y_original_persona = persona.getY();
+	    persona.moverAbajo();
+	    int x_nuevo_caja = caja.getX();
+	    int y_nuevo_caja = caja.getY();
+	    int x_nuevo_persona = persona.getX();
+	    int y_nuevo_persona = persona.getY();
+
+	    assertEquals("la caja no se tiene que mover en x", x_original_caja, x_nuevo_caja);
+	    assertEquals("la caja no se tiene que mover en y", y_original_caja, y_nuevo_caja);
+	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
+	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	}
+	
+	@Test
+	public void test05A09EmpujarCajaIzquierdaOcupadoConCaja(){
+		Caja caja_izq = new Caja(3, 3);
+		this.escenario.agregarCaja(caja_izq);
+		caja_izq.setEscenario(this.escenario);
+		
+		Caja caja_der = new Caja(4, 3);
+		this.escenario.agregarCaja(caja_der);
+		caja_der.setEscenario(this.escenario);
+		
+		Persona persona = new Persona(5, 3);
+		persona.setEscenario(this.escenario);
+			    
+	    int x_original_caja_izq = caja_izq.getX();
+	    int y_original_caja_izq = caja_izq.getY();
+	    int x_original_caja_der = caja_der.getX();
+	    int y_original_caja_der = caja_der.getY();
+	    int x_original_persona = persona.getX();
+	    int y_original_persona = persona.getY();
+	    persona.moverIzquierda();
+	    int x_nuevo_caja_izq = caja_izq.getX();
+	    int y_nuevo_caja_izq = caja_izq.getY();
+	    int x_nuevo_caja_der = caja_der.getX();
+	    int y_nuevo_caja_der = caja_der.getY();
+	    int x_nuevo_persona = persona.getX();
+	    int y_nuevo_persona = persona.getY();
+
+	    assertEquals("la caja no se tiene que mover en x", x_original_caja_izq, x_nuevo_caja_izq);
+	    assertEquals("la caja no se tiene que mover en y", y_original_caja_izq, y_nuevo_caja_izq);
+	    assertEquals("la caja no se tiene que mover en x", x_original_caja_der, x_nuevo_caja_der);
+	    assertEquals("la caja no se tiene que mover en y", y_original_caja_der, y_nuevo_caja_der);
+	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
+	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	}
+	
+	@Test
+	public void test05A10EmpujarCajaDerechaOcupadoConCaja(){
+		Caja caja_izq = new Caja(3, 3);
+		this.escenario.agregarCaja(caja_izq);
+		caja_izq.setEscenario(this.escenario);
+		
+		Caja caja_der = new Caja(4, 3);
+		this.escenario.agregarCaja(caja_der);
+		caja_der.setEscenario(this.escenario);
+		
+		Persona persona = new Persona(2, 3);
+		persona.setEscenario(this.escenario);
+			    
+	    int x_original_caja_izq = caja_izq.getX();
+	    int y_original_caja_izq = caja_izq.getY();
+	    int x_original_caja_der = caja_der.getX();
+	    int y_original_caja_der = caja_der.getY();
+	    int x_original_persona = persona.getX();
+	    int y_original_persona = persona.getY();
+	    persona.moverDerecha();
+	    int x_nuevo_caja_izq = caja_izq.getX();
+	    int y_nuevo_caja_izq = caja_izq.getY();
+	    int x_nuevo_caja_der = caja_der.getX();
+	    int y_nuevo_caja_der = caja_der.getY();
+	    int x_nuevo_persona = persona.getX();
+	    int y_nuevo_persona = persona.getY();
+
+	    assertEquals("la caja no se tiene que mover en x", x_original_caja_izq, x_nuevo_caja_izq);
+	    assertEquals("la caja no se tiene que mover en y", y_original_caja_izq, y_nuevo_caja_izq);
+	    assertEquals("la caja no se tiene que mover en x", x_original_caja_der, x_nuevo_caja_der);
+	    assertEquals("la caja no se tiene que mover en y", y_original_caja_der, y_nuevo_caja_der);
+	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
+	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	}
+	
+	@Test
+	public void test05A11EmpujarCajaArribaOcupadoConCaja(){
+		Caja caja_izq = new Caja(3, 3);
+		this.escenario.agregarCaja(caja_izq);
+		caja_izq.setEscenario(this.escenario);
+		
+		Caja caja_der = new Caja(3, 4);
+		this.escenario.agregarCaja(caja_der);
+		caja_der.setEscenario(this.escenario);
+		
+		Persona persona = new Persona(3, 5);
+		persona.setEscenario(this.escenario);
+			    
+	    int x_original_caja_izq = caja_izq.getX();
+	    int y_original_caja_izq = caja_izq.getY();
+	    int x_original_caja_der = caja_der.getX();
+	    int y_original_caja_der = caja_der.getY();
+	    int x_original_persona = persona.getX();
+	    int y_original_persona = persona.getY();
+	    persona.moverArriba();
+	    int x_nuevo_caja_izq = caja_izq.getX();
+	    int y_nuevo_caja_izq = caja_izq.getY();
+	    int x_nuevo_caja_der = caja_der.getX();
+	    int y_nuevo_caja_der = caja_der.getY();
+	    int x_nuevo_persona = persona.getX();
+	    int y_nuevo_persona = persona.getY();
+
+	    assertEquals("la caja no se tiene que mover en x", x_original_caja_izq, x_nuevo_caja_izq);
+	    assertEquals("la caja no se tiene que mover en y", y_original_caja_izq, y_nuevo_caja_izq);
+	    assertEquals("la caja no se tiene que mover en x", x_original_caja_der, x_nuevo_caja_der);
+	    assertEquals("la caja no se tiene que mover en y", y_original_caja_der, y_nuevo_caja_der);
+	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
+	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	}
+	
+	@Test
+	public void test05A12EmpujarCajaAbajoOcupadoConCaja(){
+		Caja caja_izq = new Caja(3, 3);
+		this.escenario.agregarCaja(caja_izq);
+		caja_izq.setEscenario(this.escenario);
+		
+		Caja caja_der = new Caja(3, 4);
+		this.escenario.agregarCaja(caja_der);
+		caja_der.setEscenario(this.escenario);
+		
+		Persona persona = new Persona(3, 2);
+		persona.setEscenario(this.escenario);
+			    
+	    int x_original_caja_izq = caja_izq.getX();
+	    int y_original_caja_izq = caja_izq.getY();
+	    int x_original_caja_der = caja_der.getX();
+	    int y_original_caja_der = caja_der.getY();
+	    int x_original_persona = persona.getX();
+	    int y_original_persona = persona.getY();
+	    persona.moverAbajo();
+	    int x_nuevo_caja_izq = caja_izq.getX();
+	    int y_nuevo_caja_izq = caja_izq.getY();
+	    int x_nuevo_caja_der = caja_der.getX();
+	    int y_nuevo_caja_der = caja_der.getY();
+	    int x_nuevo_persona = persona.getX();
+	    int y_nuevo_persona = persona.getY();
+
+	    assertEquals("la caja no se tiene que mover en x", x_original_caja_izq, x_nuevo_caja_izq);
+	    assertEquals("la caja no se tiene que mover en y", y_original_caja_izq, y_nuevo_caja_izq);
+	    assertEquals("la caja no se tiene que mover en x", x_original_caja_der, x_nuevo_caja_der);
+	    assertEquals("la caja no se tiene que mover en y", y_original_caja_der, y_nuevo_caja_der);
+	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
+	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	}
 }
