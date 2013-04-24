@@ -2,6 +2,7 @@ package ar.com.stomalab.souyaban.model;
 
 public class Persona extends Item {
 	Escenario escenario;
+	private int cantidad_movimientos = 0;
 	
 	public Persona(){
 		super();
@@ -44,6 +45,7 @@ public class Persona extends Item {
 			}
 					
 			this.setPosicion(this.getX() - 1, this.getY());
+			this.cantidad_movimientos++;
 		}
 	}
 	
@@ -56,6 +58,7 @@ public class Persona extends Item {
 			}
 					
 			this.setPosicion(this.getX() + 1, this.getY());
+			this.cantidad_movimientos++;
 		}
 	}
 	
@@ -68,6 +71,7 @@ public class Persona extends Item {
 			}
 					
 			this.setPosicion(this.getX(), this.getY() - 1);
+			this.cantidad_movimientos++;
 		}
 	}
 	
@@ -80,6 +84,7 @@ public class Persona extends Item {
 			}
 					
 			this.setPosicion(this.getX(), this.getY() + 1);
+			this.cantidad_movimientos++;
 		}
 	}
 
@@ -107,6 +112,10 @@ public class Persona extends Item {
 		}
 		
 		return caja_en_posicion;
+	}
+
+	public Object getCantidadMovimientos() {
+		return this.cantidad_movimientos;
 	}
 }
 

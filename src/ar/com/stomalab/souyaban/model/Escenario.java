@@ -133,5 +133,9 @@ public class Escenario {
 		
 		return puede_moverse;
 	}
+
+	public Persona getPersona() {
+		return this.persona;
+	}
 	
 }
