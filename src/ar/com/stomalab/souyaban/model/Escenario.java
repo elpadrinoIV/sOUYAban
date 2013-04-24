@@ -76,5 +76,21 @@ public class Escenario {
 		
 		return representacion;
 	}
+
+	public boolean estaLibre(int x, int y) {
+		boolean libre = true;
+		for (Pared item : this.paredes){
+			if (item.ocupaLugar() && item.getX() == x && item.getY() == y){
+				libre = false;
+			}
+		}
+		
+		for (Caja item : this.cajas){
+			if (item.ocupaLugar() && item.getX() == x && item.getY() == y){
+				libre = false;
+			}
+		}
+		return libre;
+	}
 	
 }
