@@ -1,0 +1,47 @@
+01 - El muñeco se puede mover a una zona libre
+	01A01: Solo izquierda libre, mover a la izquierda, el muñeco debe poder moverse
+	01A02: Solo derecha libre, mover a la derecha, el muñeco debe poder moverse
+	01A03: Solo arriba libre, mover arriba, el muñeco debe poder moverse
+	01A04: Solo abajo libre, mover abajo, el muñeco debe poder moverse
+02 - El muñeco no se puede mover a una zona ocupada
+	02A01: Solo izquierda ocupado, mover a la izquierda, el muñeco no debe poder moverse
+	02A02: Solo derecha ocupado, mover a la derecha, el muñeco no debe poder moverse
+	02A03: Solo arriba ocupado, mover arriba, el muñeco no debe poder moverse
+	02A04: Solo abajo ocupado, mover abajo, el muñeco no debe poder moverse
+03 - Todas las luces ocupadas con cajas completan el nivel
+	03A01: 3 luces, 3 cajas, las cajas en las posiciones de las luces 
+	03A02: 3 luces, 4 cajas, 3 de las cajas sobre las luces
+04 - Si hay luces sin ocupar, el nivel no está completo
+	04A01: 3 luces, ninguna caja
+	04A02: 3 luces, 3 cajas, 2 en luces, la tercera afuera
+	04A03: 3 luces, 4 cajas, 2 en luces, 2 afuera
+05 - Empujar cajas
+	05A01: tratar de mover caja a la izquierda estando libre
+	05A02: tratar de mover caja a la derecha estando libre
+	05A03: tratar de mover caja arriba estando libre
+	05A04: tratar de mover caja abajo estando libre
+	05A05: tratar de mover caja a la izquierda estando ocupado con pared
+	05A06: tratar de mover caja a la derecha estando ocupado con pared
+	05A07: tratar de mover caja arriba estando ocupado con pared
+	05A08: tratar de mover caja abajo estando ocupado con pared
+	05A09: tratar de mover caja a la izquierda estando ocupado con otra caja
+	05A10: tratar de mover caja a la derecha estando ocupado con otra caja
+	05A11: tratar de mover caja arriba estando ocupado con otra caja
+	05A12: tratar de mover caja abajo estando ocupado con otra caja
+06 - Cargar nivel de archivo
+	06A01: nivel sencillo, sin espacios extras
+	06A02: nivel sencillo, con espacios extras al final (no deberían contar como parte del "ancho")
+	06A03: nivel sencillo, con espacios extras al principio y al final (no deberían contar como parte del "ancho")
+	06A04: nivel complejo, con cajas sobre destinos, destinos solos, la persona sobra una luz
+07 - Temas (gráficos)
+08 - Highscore
+09 - Niveles
+10 - Mover con teclado
+11 - Visualización
+12 - Undo
+13 - Contar movimientos
+14 - Jugada de un nivel completo
+	14A01 - Nivel trivial
+	14A02 - Nivel mas complejo
+	14A03 - Nivel mas complejo, haciendo varios movimientos extras (empujar paredes y cajas que no se pueden empujar
+
