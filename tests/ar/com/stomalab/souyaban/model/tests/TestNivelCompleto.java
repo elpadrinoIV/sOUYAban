@@ -33,7 +33,7 @@ public class TestNivelCompleto extends TestCase {
 		
 		this.escenario.agregarPared(new Pared(1,3));
 		this.escenario.agregarDestino(new Destino(3,3));
-		this.escenario.agregarPared(new Pared(5,2));
+		this.escenario.agregarPared(new Pared(5,3));
 		
 		this.escenario.agregarPared(new Pared(1,4));
 		this.escenario.agregarDestino(new Destino(4,4));

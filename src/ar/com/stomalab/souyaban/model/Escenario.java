@@ -2,6 +2,7 @@ package ar.com.stomalab.souyaban.model;
 
 import java.util.ArrayList;
 
+
 public class Escenario {
 	private ArrayList<Destino> destinos;
 	private ArrayList<Pared> paredes;
@@ -109,6 +110,28 @@ public class Escenario {
 	      
 	    
 	    return todos_ocupados;
+	}
+
+	public ArrayList<Caja> getCajas() {
+		return this.cajas;
+	}
+
+	public boolean itemPuedeMoverseDesdeHastaPosicion(int x_desde, int y_desde, int x_hasta, int y_hasta) {
+		boolean puede_moverse = this.estaLibre(x_hasta, y_hasta);
+		
+		for (Pared item : this.paredes){
+			if (item.getX() == x_desde && item.getY() == y_desde){
+				puede_moverse = puede_moverse && item.movible();
+			}
+		}
+		
+		for (Caja item : this.cajas){
+			if (item.getX() == x_desde && item.getY() == y_desde){
+				puede_moverse = puede_moverse && item.movible();
+			}
+		}
+		
+		return puede_moverse;
 	}
 	
 }

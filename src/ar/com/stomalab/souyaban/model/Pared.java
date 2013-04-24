@@ -13,4 +13,9 @@ public class Pared extends Item {
 	public boolean ocupaLugar() {
 		return true;
 	}
+	
+	@Override
+	public boolean movible() {
+		return false;
+	}
 }

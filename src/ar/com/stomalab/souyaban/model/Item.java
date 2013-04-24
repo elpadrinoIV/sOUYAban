@@ -8,4 +8,6 @@ public abstract class Item extends Posicionable{
 	}
 	
 	public abstract boolean ocupaLugar();
+	
+	public abstract boolean movible();
 }

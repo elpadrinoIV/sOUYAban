@@ -13,4 +13,9 @@ public class Destino extends Item {
 	public boolean ocupaLugar() {
 		return false;
 	}
+	
+	@Override
+	public boolean movible() {
+		return false;
+	}
 }
