@@ -1,6 +1,7 @@
 package ar.com.stomalab.souyaban.model;
 
 public class Caja extends Item {
+	Escenario escenario;
 	public Caja(){
 		super();
 	}
@@ -12,5 +13,9 @@ public class Caja extends Item {
 	@Override
 	public boolean ocupaLugar() {
 		return true;
+	}
+
+	public void setEscenario(Escenario escenario) {
+		this.escenario = escenario;
 	}
 }

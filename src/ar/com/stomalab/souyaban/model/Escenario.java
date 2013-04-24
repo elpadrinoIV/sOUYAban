@@ -92,5 +92,23 @@ public class Escenario {
 		}
 		return libre;
 	}
+
+	public boolean todosLosDestinosOcupados(){
+		boolean todos_ocupados = true;
+		for (Destino destino: this.destinos){
+			boolean destino_ocupado = false;
+			
+			for (Caja caja : this.cajas){
+				if (destino.getX() == caja.getX() && destino.getY() == caja.getY()){
+					destino_ocupado = true;
+				}	
+			}
+			
+			todos_ocupados = todos_ocupados && destino_ocupado;
+		}
+	      
+	    
+	    return todos_ocupados;
+	}
 	
 }
