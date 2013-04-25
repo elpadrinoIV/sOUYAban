@@ -9,12 +9,15 @@ public class Escenario {
 	private ArrayList<Caja> cajas;
 		
 	private Persona persona;
+	
+	private Historia historia;
 		
 	public Escenario()
 	{
 		this.destinos = new ArrayList<Destino>();
 		this.paredes = new ArrayList<Pared>();
 		this.cajas = new ArrayList<Caja>();
+		this.historia = new Historia();
 	}
 	
 	public void agregarDestino(Destino destino){
@@ -137,9 +140,13 @@ public class Escenario {
 	public Persona getPersona() {
 		return this.persona;
 	}
+	
+	public Historia getHistoria(){
+		return this.historia;
+	}
 
 	public void deshacer() {
-
+		this.historia.deshacer();
 	}
 	
 }

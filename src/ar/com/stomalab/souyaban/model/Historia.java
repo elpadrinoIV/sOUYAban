@@ -62,25 +62,28 @@ public class Historia {
 	}
 	
 	public void deshacer(){
-		ArrayList<ArrayList<Object> > evento = this.historia.remove(this.historia.size() - 1);
-		
-		if (null != evento){
-			for (ArrayList<Object> accion_evento : evento){
-				Quien quien = (Quien) accion_evento.get(0);
-				Item item = (Item) accion_evento.get(1);
-				int desde_x = (Integer) accion_evento.get(2);
-				int desde_y = (Integer) accion_evento.get(3);
-				
-				switch (quien){
-				case PERSONA:
-					item.setPosicion(desde_x, desde_y);
-					// item.cambiar_cantidad_movimientos(item.get_cantidad_movimientos - 1)
-					break;
-				case CAJA:
-					item.setPosicion(desde_x, desde_y);
-					break;
-				default:
-					break;
+		if (this.historia.size() > 0){
+			ArrayList<ArrayList<Object> > evento = this.historia.remove(this.historia.size() - 1);
+			
+			if (null != evento){
+				for (ArrayList<Object> accion_evento : evento){
+					Quien quien = (Quien) accion_evento.get(0);
+					Item item = (Item) accion_evento.get(1);
+					int desde_x = (Integer) accion_evento.get(2);
+					int desde_y = (Integer) accion_evento.get(3);
+					
+					switch (quien){
+					case PERSONA:
+						item.setPosicion(desde_x, desde_y);
+						// item.cambiar_cantidad_movimientos(item.get_cantidad_movimientos - 1)
+						break;
+					case CAJA:
+						System.out.println("Desahcer caja desde (" + desde_x + ", "+ desde_y + ")");
+						item.setPosicion(desde_x, desde_y);
+						break;
+					default:
+						break;
+					}
 				}
 			}
 		}

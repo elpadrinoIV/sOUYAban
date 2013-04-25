@@ -37,55 +37,78 @@ public class Persona extends Item {
 	}
 	
 	public void moverIzquierda() {
+		Historia historia = this.escenario.getHistoria();
+		historia.empezarEvento();
 		if (this.puedeMoverseIzquierda()){
 			Caja caja_a_la_izquierda = this.cajaEnPosicion(this.getX() - 1, this.getY());
 			if (null != caja_a_la_izquierda){
-				
+				historia.cajaSeMovio(caja_a_la_izquierda, this.getX() - 1, this.getY(), this.getX() - 2, this.getY());
 				caja_a_la_izquierda.moverIzquierda();
 			}
-					
+			
+			historia.personaSeMovio(this, this.getX(), this.getY(), this.getX() - 1, this.getY());		
 			this.setPosicion(this.getX() - 1, this.getY());
 			this.cantidad_movimientos++;
 		}
+		
+		historia.terminarEvento();
 	}
 	
 	public void moverDerecha() {
+		Historia historia = this.escenario.getHistoria();
+		historia.empezarEvento();
+		
 		if (this.puedeMoverseDerecha()){
 			Caja caja_a_la_derecha = this.cajaEnPosicion(this.getX() + 1, this.getY());
 			if (null != caja_a_la_derecha){
-				
+				historia.cajaSeMovio(caja_a_la_derecha, this.getX() + 1, this.getY(), this.getX() + 2, this.getY());
 				caja_a_la_derecha.moverDerecha();
 			}
 					
+			historia.personaSeMovio(this, this.getX(), this.getY(), this.getX() + 1, this.getY());
 			this.setPosicion(this.getX() + 1, this.getY());
 			this.cantidad_movimientos++;
 		}
+		
+		historia.terminarEvento();
 	}
 	
 	public void moverArriba() {
+		Historia historia = this.escenario.getHistoria();
+		historia.empezarEvento();
+		
 		if (this.puedeMoverseArriba()){
 			Caja caja_arriba = this.cajaEnPosicion(this.getX(), this.getY() - 1);
 			if (null != caja_arriba){
-				
+				historia.cajaSeMovio(caja_arriba, this.getX(), this.getY() - 1, this.getX(), this.getY() - 2);
 				caja_arriba.moverArriba();
 			}
 					
+			historia.personaSeMovio(this, this.getX(), this.getY(), this.getX(), this.getY() - 1);
 			this.setPosicion(this.getX(), this.getY() - 1);
 			this.cantidad_movimientos++;
 		}
+		
+		historia.terminarEvento();
 	}
 	
 	public void moverAbajo() {
+		Historia historia = this.escenario.getHistoria();
+		historia.empezarEvento();
+		
 		if (this.puedeMoverseAbajo()){
 			Caja caja_abajo = this.cajaEnPosicion(this.getX(), this.getY() + 1);
 			if (null != caja_abajo){
-				
+				historia.cajaSeMovio(caja_abajo, this.getX(), this.getY() + 1, this.getX(), this.getY() + 2);
 				caja_abajo.moverAbajo();
 			}
 					
+			historia.personaSeMovio(this, this.getX(), this.getY(), this.getX(), this.getY() + 1);
 			this.setPosicion(this.getX(), this.getY() + 1);
 			this.cantidad_movimientos++;
 		}
+		
+		historia.terminarEvento();
 	}
 
 	@Override
