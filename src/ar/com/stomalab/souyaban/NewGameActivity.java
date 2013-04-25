@@ -43,6 +43,9 @@ public class NewGameActivity extends Activity {
 			layout += '\n';
 		}
 		
+		layout += "\nMovimientos: ";
+		layout += escenario.getPersona().getCantidadMovimientos();
+		layout += '\n';
 		// Create the text view
 	    TextView textView = new TextView(this);
 	    // textView.setTextSize(40);
@@ -90,5 +93,4 @@ public class NewGameActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
 }

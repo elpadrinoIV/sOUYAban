@@ -44,7 +44,7 @@ public class TestContarMovimientos extends TestCase {
 		this.escenario.agregarPared(new Pared(7,3));
 		
 		this.escenario.agregarPared(new Pared(1,4));
-		Caja caja1 = new Caja(4, 4);
+		Caja caja1 = new Caja(5, 4);
 		caja1.setEscenario(this.escenario);
 		this.escenario.agregarCaja(caja1);
 		this.escenario.agregarPared(new Pared(7,4));
@@ -55,17 +55,17 @@ public class TestContarMovimientos extends TestCase {
 		this.escenario.agregarCaja(caja2);
 		this.escenario.agregarPared(new Pared(7,5));
 		
-		this.escenario.agregarPared(new Pared(1,5));
-		this.escenario.agregarPared(new Pared(2,5));
-		this.escenario.agregarPared(new Pared(3,5));
-		this.escenario.agregarPared(new Pared(4,5));
-		this.escenario.agregarPared(new Pared(5,5));
-		this.escenario.agregarPared(new Pared(6,5));
-		this.escenario.agregarPared(new Pared(7,5));
+		this.escenario.agregarPared(new Pared(1,6));
+		this.escenario.agregarPared(new Pared(2,6));
+		this.escenario.agregarPared(new Pared(3,6));
+		this.escenario.agregarPared(new Pared(4,6));
+		this.escenario.agregarPared(new Pared(5,6));
+		this.escenario.agregarPared(new Pared(6,6));
+		this.escenario.agregarPared(new Pared(7,6));
 	}
 	
 	@Test
-	public void test13A013ContarMoverLibre(){
+	public void test13A01ContarMoverLibre(){
 		JugadorAutomatico jugador_automatico = new JugadorAutomatico();
 		jugador_automatico.setEscenario(this.escenario);
 		
@@ -74,5 +74,30 @@ public class TestContarMovimientos extends TestCase {
 		jugador_automatico.ejecutarInstrucciones(instrucciones);
 		
 		assertEquals("Cantidad de movimientos erroneos", instrucciones.length(), this.escenario.getPersona().getCantidadMovimientos() );
+	}
+	
+	@Test
+	public void test13A02ContarMoverLibreYEmpujar(){
+		JugadorAutomatico jugador_automatico = new JugadorAutomatico();
+		jugador_automatico.setEscenario(this.escenario);
+		
+		String instrucciones = "RDLDLULURURDD";
+		
+		jugador_automatico.ejecutarInstrucciones(instrucciones);
+		
+		assertEquals("Cantidad de movimientos erroneos", instrucciones.length(), this.escenario.getPersona().getCantidadMovimientos() );
+	}
+	
+	@Test
+	public void test13A03ContarMoverLibreYEmpujarYParedesYCajasBloqueadas(){
+		JugadorAutomatico jugador_automatico = new JugadorAutomatico();
+		jugador_automatico.setEscenario(this.escenario);
+		
+		String instrucciones = "RDLDLUU" + "UUUUUU" + "LL" + "LLLLLL" + "DD" + "DDDDD" + "RRR" + "RRRRRR";
+		int cantidad_movimientos_reales = 7 + 2 + 2 + 3;
+		
+		jugador_automatico.ejecutarInstrucciones(instrucciones);
+		
+		assertEquals("Cantidad de movimientos erroneos", cantidad_movimientos_reales, this.escenario.getPersona().getCantidadMovimientos() );
 	}
 }
