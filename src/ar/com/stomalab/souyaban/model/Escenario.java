@@ -137,5 +137,9 @@ public class Escenario {
 	public Persona getPersona() {
 		return this.persona;
 	}
+
+	public void deshacer() {
+
+	}
 	
 }
