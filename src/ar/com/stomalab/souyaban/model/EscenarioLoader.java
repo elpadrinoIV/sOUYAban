@@ -32,6 +32,7 @@ public class EscenarioLoader {
 			    {
 			    	Caja caja = new Caja();
 			    	caja.setPosicion(columna, fila);
+			    	caja.setEscenario(escenario);
 			    	escenario.agregarCaja(caja);
 			    	break;
 			    }
@@ -39,6 +40,7 @@ public class EscenarioLoader {
 			    {
 			    	Persona persona = new Persona();
 			    	persona.setPosicion(columna, fila);
+			    	persona.setEscenario(escenario);
 			    	escenario.agregarPersona(persona);
 			    	break;
 			    }
@@ -50,6 +52,7 @@ public class EscenarioLoader {
 		            
 		            Caja caja = new Caja();
 			    	caja.setPosicion(columna, fila);
+			    	caja.setEscenario(escenario);
 			    	escenario.agregarCaja(caja);
 			    	break;
 			    }
@@ -61,6 +64,7 @@ public class EscenarioLoader {
 		            
 		            Persona persona = new Persona();
 			    	persona.setPosicion(columna, fila);
+			    	persona.setEscenario(escenario);
 			    	escenario.agregarPersona(persona);
 		            break;
 			    }
@@ -69,6 +73,7 @@ public class EscenarioLoader {
 			    
 			}
 		}
+		
 		return escenario;
 	}
 	/*
