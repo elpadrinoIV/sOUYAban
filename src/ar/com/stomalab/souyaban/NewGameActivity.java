@@ -9,9 +9,11 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
+import android.content.res.Resources;
 import android.os.Build;
 import ar.com.stomalab.souyaban.model.Escenario;
 import ar.com.stomalab.souyaban.model.EscenarioLoader;
+import ar.com.stomalab.souyaban.views.GameView;
 import android.graphics.Typeface;
 
 public class NewGameActivity extends Activity {
@@ -31,6 +33,13 @@ public class NewGameActivity extends Activity {
 		lineas.add("###    #");
 		lineas.add("  ######");
 		Escenario escenario = escenario_loader.cargarEscenario(lineas);
+		
+		Resources res = getResources();
+
+        setContentView(R.layout.activity_new_game);
+        GameView game_view = (GameView) this.findViewById(R.id.GAME);
+        game_view.iniciarNuevoJuego(escenario);
+		/*
 		char[][] layout_escenario = escenario.getRepresentacion();
 		String layout = new String();
 		for (int fila = 0; fila < layout_escenario.length; fila++)
@@ -46,15 +55,16 @@ public class NewGameActivity extends Activity {
 		layout += "\nMovimientos: ";
 		layout += escenario.getPersona().getCantidadMovimientos();
 		layout += '\n';
+		*/
 		// Create the text view
-	    TextView textView = new TextView(this);
+	    // TextView textView = new TextView(this);
 	    // textView.setTextSize(40);
-	    textView.setText(layout);
-	    textView.setTypeface(Typeface.MONOSPACE);
+	    // textView.setText(layout);
+	    // textView.setTypeface(Typeface.MONOSPACE);
 	    
 
 	    // Set the text view as the activity layout
-	    setContentView(textView);
+	    // setContentView(textView);
 	    
 		// Show the Up button in the action bar.
 		setupActionBar();

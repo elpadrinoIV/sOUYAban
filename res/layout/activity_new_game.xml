@@ -8,10 +8,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".NewGameActivity" >
 
+    <!-- 
     <TextView
         android:id="@+id/GAME_TEXT_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:typeface="monospace" />
+         -->
+         
+         <ar.com.stomalab.souyaban.views.GameView android:id="@+id/GAME"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent"/>
 
 </RelativeLayout>
