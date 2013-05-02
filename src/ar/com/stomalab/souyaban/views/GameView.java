@@ -27,15 +27,15 @@ public class GameView extends TileView{
     }
     
     private void initGameView() {
-        // setFocusable(true);
+        setFocusable(true);
 
         Resources r = this.getContext().getResources();
         resetBitmapMap(6);
         mapearIdADrawable(PARED, r.getDrawable(R.drawable.pared));
         mapearIdADrawable(DESTINO, r.getDrawable(R.drawable.destino));
-        mapearIdADrawable(CAJA_SOLA, r.getDrawable(R.drawable.caja));
+        mapearIdADrawable(CAJA_SOLA, r.getDrawable(R.drawable.caja_sola));
         mapearIdADrawable(CAJA_SOBRE_DESTINO, r.getDrawable(R.drawable.caja_sobre_destino));
-        mapearIdADrawable(TIPITO, r.getDrawable(R.drawable.tipito));
+        mapearIdADrawable(TIPITO, r.getDrawable(R.drawable.guy));
     }
     
     public void iniciarNuevoJuego(Escenario escenario) {
@@ -43,6 +43,7 @@ public class GameView extends TileView{
         this.setDimensiones(escenario.getAlto(), escenario.getAncho());
         initGameView();
         update();
+        this.invalidate();
     }
     
     private void update() {

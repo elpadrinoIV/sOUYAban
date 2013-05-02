@@ -6,12 +6,16 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 public class TileView extends View {
 	private static int tile_size;
-	private static int min_tile_size;
-	private static int max_tile_size;
+	private static int min_tile_size = 20;
+	private static int max_tile_size = 50;
+	
+	private static int ancho_ventana;
+	private static int alto_ventana;
 	
 	private static int cant_filas;
 	private static int cant_columnas;
@@ -25,12 +29,15 @@ public class TileView extends View {
 	
 	private int[][] tile_grid;
 	
+	
 	public TileView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        cant_filas = 10;
-        cant_columnas = 10;
-        tile_size = 20;
+        // cant_filas = 10;
+        // cant_columnas = 10;
+        // tile_size = 20;
+        
+        // tile_size = 20;
         // TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TileView);
         // mTileSize = a.getDimensionPixelSize(R.styleable.TileView_tileSize, 12);
 
@@ -39,9 +46,11 @@ public class TileView extends View {
 
     public TileView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
-        cant_filas = 10;
-        cant_columnas = 10;
+        // cant_filas = 10;
+        // cant_columnas = 10;
+        // tile_size = 20;
+        // cant_filas = 10;
+        // cant_columnas = 10;
         // TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TileView);
         // mTileSize = a.getDimensionPixelSize(R.styleable.TileView_tileSize, 12);
 
@@ -110,31 +119,41 @@ public class TileView extends View {
     	
     	tile_grid = new int[cant_filas][cant_columnas];
     	clearTiles();
+    	acomodar_sizes(ancho_ventana, alto_ventana);
     }
     
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     	// Tengo que ver cual es el tamaño del tile, teniendo en cuenta la cantidad que entran,
     	// pero siempre respetando el minimo y el máximo.
+    	ancho_ventana = w;
+    	alto_ventana = h;
+    	acomodar_sizes(w, h);
+    }
     	
-    	int ancho_tile = (int)Math.floor(w/cant_columnas);
-    	int alto_tile = (int)Math.floor(h/cant_filas);
-    	
-    	if (ancho_tile > max_tile_size){
-    		ancho_tile = max_tile_size;
-    	}else if (ancho_tile < min_tile_size){
-    		ancho_tile = min_tile_size;
+    private void acomodar_sizes(int ancho_ventana, int alto_ventana){
+    	if (cant_columnas != 0 && cant_filas != 0){
+	    	int ancho_tile = (int)Math.floor(ancho_ventana/cant_columnas);
+	    	int alto_tile = (int)Math.floor(alto_ventana/cant_filas);
+	    	
+	    	if (ancho_tile > max_tile_size){
+	    		ancho_tile = max_tile_size;
+	    	}else if (ancho_tile < min_tile_size){
+	    		ancho_tile = min_tile_size;
+	    	}
+	    	
+	    	if (alto_tile > max_tile_size){
+	    		alto_tile = max_tile_size;
+	    	}else if (alto_tile < min_tile_size){
+	    		alto_tile = min_tile_size;
+	    	}
+	    	
+	    	tile_size = Math.min(ancho_tile, alto_tile);
+    	}else{
+    		tile_size = min_tile_size;
     	}
     	
-    	if (alto_tile > max_tile_size){
-    		alto_tile = max_tile_size;
-    	}else if (alto_tile < min_tile_size){
-    		alto_tile = min_tile_size;
-    	}
-    	
-    	tile_size = Math.min(ancho_tile, alto_tile);
-    	
-    	tile_size = 20;
+    	tile_size = 50;
     	x_offset = 0;
     	y_offset = 0;
     }
