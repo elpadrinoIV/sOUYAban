@@ -4,17 +4,18 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnKeyListener;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
-import android.content.res.Resources;
 import android.os.Build;
 import ar.com.stomalab.souyaban.model.Escenario;
 import ar.com.stomalab.souyaban.model.EscenarioLoader;
 import ar.com.stomalab.souyaban.views.GameView;
-import android.graphics.Typeface;
 
 public class NewGameActivity extends Activity {
 
@@ -25,7 +26,7 @@ public class NewGameActivity extends Activity {
 		ArrayList<String> lineas = new ArrayList<String>();
 		
 		lineas.add("######  ");
-		lineas.add("#  . #  ");
+		lineas.add("#  . #  ");;
 		lineas.add("#    ###");
 		lineas.add("# #$$. #");
 		lineas.add("#.  ## #");
@@ -34,11 +35,14 @@ public class NewGameActivity extends Activity {
 		lineas.add("  ######");
 		Escenario escenario = escenario_loader.cargarEscenario(lineas);
 		
-		Resources res = getResources();
-
         setContentView(R.layout.activity_new_game);
         GameView game_view = (GameView) this.findViewById(R.id.GAME);
+        TextView contador = (TextView)this.findViewById(R.id.CONTADOR_MOVIMIENTOS);
+        TextView estado = (TextView)this.findViewById(R.id.ESTADO_JUEGO);
+        game_view.setDependentViews(contador,  estado);
+        // game_view.setOnKeyListener(this);
         game_view.iniciarNuevoJuego(escenario);
+        
 		/*
 		char[][] layout_escenario = escenario.getRepresentacion();
 		String layout = new String();
@@ -103,4 +107,16 @@ public class NewGameActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+/*
+	@Override
+	public boolean onKey(View v, int key_code, KeyEvent event) {
+		
+		return true;
+	}
+	
+	@Override
+	public boolean onKeyDown (int keyCode, KeyEvent event){
+		return true;
+	}
+	*/
 }
