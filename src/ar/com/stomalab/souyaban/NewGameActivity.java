@@ -7,8 +7,6 @@ import android.app.Activity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnKeyListener;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
@@ -18,7 +16,8 @@ import ar.com.stomalab.souyaban.model.EscenarioLoader;
 import ar.com.stomalab.souyaban.views.GameView;
 
 public class NewGameActivity extends Activity {
-
+	Escenario escenario;
+	GameView game_view;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,43 +32,16 @@ public class NewGameActivity extends Activity {
 		lineas.add("#@$ ## #");
 		lineas.add("###    #");
 		lineas.add("  ######");
-		Escenario escenario = escenario_loader.cargarEscenario(lineas);
+		escenario = escenario_loader.cargarEscenario(lineas);
 		
         setContentView(R.layout.activity_new_game);
-        GameView game_view = (GameView) this.findViewById(R.id.GAME);
+        game_view = (GameView) this.findViewById(R.id.GAME);
         TextView contador = (TextView)this.findViewById(R.id.CONTADOR_MOVIMIENTOS);
         TextView estado = (TextView)this.findViewById(R.id.ESTADO_JUEGO);
         game_view.setDependentViews(contador,  estado);
         // game_view.setOnKeyListener(this);
         game_view.iniciarNuevoJuego(escenario);
-        
-		/*
-		char[][] layout_escenario = escenario.getRepresentacion();
-		String layout = new String();
-		for (int fila = 0; fila < layout_escenario.length; fila++)
-		{
-			for (int col = 0; col < layout_escenario[fila].length; col++)
-			{
-				layout += layout_escenario[fila][col];
-			}
-			
-			layout += '\n';
-		}
-		
-		layout += "\nMovimientos: ";
-		layout += escenario.getPersona().getCantidadMovimientos();
-		layout += '\n';
-		*/
-		// Create the text view
-	    // TextView textView = new TextView(this);
-	    // textView.setTextSize(40);
-	    // textView.setText(layout);
-	    // textView.setTypeface(Typeface.MONOSPACE);
-	    
-
-	    // Set the text view as the activity layout
-	    // setContentView(textView);
-	    
+        	    
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
@@ -107,16 +79,30 @@ public class NewGameActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-/*
-	@Override
-	public boolean onKey(View v, int key_code, KeyEvent event) {
-		
-		return true;
-	}
 	
-	@Override
-	public boolean onKeyDown (int keyCode, KeyEvent event){
-		return true;
-	}
-	*/
+	 @Override
+    public boolean onKeyDown(int keyCode, KeyEvent msg) {
+
+	 switch(keyCode){
+    	case KeyEvent.KEYCODE_A:
+    		escenario.getPersona().moverIzquierda();
+    		break;
+    	case KeyEvent.KEYCODE_D:
+    		escenario.getPersona().moverDerecha();
+    		break;
+    	case KeyEvent.KEYCODE_W:
+    		escenario.getPersona().moverArriba();
+    		break;
+    	case KeyEvent.KEYCODE_S:
+    		escenario.getPersona().moverAbajo();
+    		break;
+    	case KeyEvent.KEYCODE_SPACE:
+    		escenario.deshacer();
+    	}
+    	
+    	
+    	game_view.update();
+
+        return super.onKeyDown(keyCode, msg);
+    }
 }

@@ -10,6 +10,6 @@
     <string name="instructions">Bla1\n\nBla2\n\nBla3\n\nBla4\n\nBla5\n\nBla6\n\nBla7\n\nBla8\n\nBla9\n\nBla10\n\nBla11\n\n
         Bla12\n\nBla13\n\nBla14\n\nBla15\n\nBla16\n\nBla17\n\nBla18\n\nBla19\n\nBla20</string>
     <string name="title_activity_new_game">Play</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="moves">Movimientos: </string>
 
 </resources>

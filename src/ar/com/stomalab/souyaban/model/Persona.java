@@ -137,7 +137,7 @@ public class Persona extends Item {
 		return caja_en_posicion;
 	}
 
-	public Object getCantidadMovimientos() {
+	public int getCantidadMovimientos() {
 		return this.cantidad_movimientos;
 	}
 }

@@ -6,7 +6,6 @@ import ar.com.stomalab.souyaban.model.Escenario;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.AttributeSet;
-import android.view.KeyEvent;
 import android.widget.TextView;
 
 public class GameView extends TileView{
@@ -60,7 +59,7 @@ public class GameView extends TileView{
         this.invalidate();
     }
     
-    private void update() {
+    public void update() {
     	char[][] layout_escenario = escenario.getRepresentacion();
     	clearTiles();
     	for (int fila = 0; fila < layout_escenario.length; fila++)
@@ -89,32 +88,10 @@ public class GameView extends TileView{
 				}
 			}
 		}
-    	String texto_str = "Cantidad movimientos" + escenario.getPersona().getCantidadMovimientos();
+    	Resources res = getResources();
+    	String texto_str = res.getString(R.string.moves) + " " + Integer.toString(escenario.getPersona().getCantidadMovimientos());
     	contador_movimientos.setText(texto_str.toCharArray(), 0, texto_str.length());
-    }
-    
-    @Override
-    public boolean onKeyDown (int keyCode, KeyEvent event){
-    	switch(keyCode){
-    	case KeyEvent.KEYCODE_A:
-    		escenario.getPersona().moverIzquierda();
-    		break;
-    	case KeyEvent.KEYCODE_D:
-    		escenario.getPersona().moverDerecha();
-    		break;
-    	case KeyEvent.KEYCODE_W:
-    		escenario.getPersona().moverArriba();
-    		break;
-    	case KeyEvent.KEYCODE_S:
-    		escenario.getPersona().moverAbajo();
-    		break;
-    	case KeyEvent.KEYCODE_SPACE:
-    		escenario.deshacer();
-    	}
     	
-    	update();
     	GameView.this.invalidate();
-		return super.onKeyDown(keyCode, event);
-	}
-    
+    }
 }
