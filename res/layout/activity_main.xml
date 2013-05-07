@@ -26,5 +26,11 @@
         android:layout_height="wrap_content"
         android:text="@string/button_about"
         android:onClick="showAbout" />
+    
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_highscore"
+        android:onClick="showHighscore" />
 
 </LinearLayout>
