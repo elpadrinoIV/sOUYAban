@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.view.Menu;
 import android.widget.TextView;
 import ar.com.stomalab.souyaban.model.HighscoreDbManager;
+import ar.com.stomalab.souyaban.model.HighscoreEntry;
 
 public class HighscoreActivity extends Activity {
 
@@ -17,14 +18,14 @@ public class HighscoreActivity extends Activity {
 		
 		text_view.setText("Hola chiche");
 		HighscoreDbManager db_manager = new HighscoreDbManager(this);
-		db_manager.open();
+		// db_manager.open();
 		
-		db_manager.createHighscore("LEV1", 1, 124);
-		db_manager.createHighscore("LEV1", 2, 150);
-		db_manager.createHighscore("LEV1", 3, 132);
-		db_manager.createHighscore("LEV2", 1, 100);
-		db_manager.createHighscore("LEV2", 2, 56);
-		
+		db_manager.agregarHighscore(new HighscoreEntry("LEV1", 1, 124));
+		db_manager.agregarHighscore(new HighscoreEntry("LEV1", 2, 150));
+		db_manager.agregarHighscore(new HighscoreEntry("LEV1", 3, 132));
+		db_manager.agregarHighscore(new HighscoreEntry("LEV2", 1, 100));
+		db_manager.agregarHighscore(new HighscoreEntry("LEV2", 2, 56));
+				
 		//db_manager.close();
 	}
 

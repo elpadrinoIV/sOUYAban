@@ -6,6 +6,12 @@ public class HighscoreEntry {
 	private int movimientos;
 	
 	public HighscoreEntry(){	}
+	
+	public HighscoreEntry(String levelset, int nivel, int movimientos){
+		this.levelset = levelset;
+		this.nivel = nivel;
+		this.movimientos = movimientos;
+	}
 
 	public String getLevelset() {
 		return levelset;

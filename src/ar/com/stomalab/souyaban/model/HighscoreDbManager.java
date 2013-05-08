@@ -27,19 +27,20 @@ public class HighscoreDbManager extends SQLiteOpenHelper {
 
 	// Database creation sql statement
 	private static final String DATABASE_CREATE = "create table "
-	      + NOMBRE_TABLA + "(" + COLUMNA_ID + " integer primary key autoincrement, " +
-								 COLUMNA_LEVELSET + "text not null, " +
-								 COLUMNA_NIVEL + "integer, " +
-								 COLUMNA_MOVIMIENTOS + "integer);";
+	      + NOMBRE_TABLA + "(" + COLUMNA_LEVELSET + " text not null, " +
+								 COLUMNA_NIVEL + " integer, " +
+								 COLUMNA_MOVIMIENTOS + " integer, " +
+								 "primary key (" + COLUMNA_LEVELSET + ", " + COLUMNA_MOVIMIENTOS + "));";
+								 
 	
 	public HighscoreDbManager(Context context) {
 		super(context, NOMBRE_DB, null, DATABASE_VERSION);
 	}
 
 	@Override
-	public void onCreate(SQLiteDatabase database) {
-		database.execSQL(DATABASE_CREATE);
-		Log.d("ONCREATE", "CREANDO TABLA" + DATABASE_CREATE);
+	public void onCreate(SQLiteDatabase db) {
+		db.execSQL(DATABASE_CREATE);
+		Log.d("ONCREATE", "CREANDO TABLA:" + DATABASE_CREATE);
 	}
 
 	@Override
@@ -47,11 +48,7 @@ public class HighscoreDbManager extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + NOMBRE_TABLA);
 		onCreate(db);
 	}
-	
-	public void borrarTabla(){
-		database.execSQL("DROP TABLE " + NOMBRE_TABLA);
-	}
-	
+		
 	public void open() throws SQLException {
 		database = this.getWritableDatabase();
 		Log.d("HIGHSCORE DB", "GETTING WRITABLE DB");
@@ -61,20 +58,16 @@ public class HighscoreDbManager extends SQLiteOpenHelper {
 		 this.close();
 	 }
 
-	 public HighscoreEntry createHighscore(String levelset, int nivel, int movimientos) {
-		 database = this.getWritableDatabase();
-		 ContentValues values = new ContentValues();
-		 values.put(COLUMNA_LEVELSET, levelset);
-		 values.put(COLUMNA_NIVEL, nivel);
-		 values.put(COLUMNA_MOVIMIENTOS, movimientos);
-		 long insert_id = database.insert(NOMBRE_TABLA, null, values);
+	 public void agregarHighscore(HighscoreEntry highscore_entry) {
+		 SQLiteDatabase db = this.getWritableDatabase();
 		 
-		 Cursor cursor = database.query(NOMBRE_TABLA, todas_las_columnas,
-				 COLUMNA_ID + " = " + insert_id, null, null, null, null);
-		 cursor.moveToFirst();
-		 HighscoreEntry highscore_entry = cursorToHighscoreEntry(cursor);
-		 cursor.close();
-		 return highscore_entry;
+		 ContentValues values = new ContentValues();
+		 values.put(COLUMNA_LEVELSET, highscore_entry.getLevelset());
+		 values.put(COLUMNA_NIVEL, highscore_entry.getNivel());
+		 values.put(COLUMNA_MOVIMIENTOS, highscore_entry.getMovimientos());
+		 
+		 db.insert(NOMBRE_TABLA, null, values);
+		 db.close();
 	 }
 	 
 	 public void deleteHighscore(HighscoreEntry highscore_entry) {
