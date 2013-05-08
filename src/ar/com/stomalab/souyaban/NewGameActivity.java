@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
@@ -18,6 +19,8 @@ import ar.com.stomalab.souyaban.views.GameView;
 public class NewGameActivity extends Activity {
 	Escenario escenario;
 	GameView game_view;
+	TextView estado;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,7 +40,7 @@ public class NewGameActivity extends Activity {
         setContentView(R.layout.activity_new_game);
         game_view = (GameView) this.findViewById(R.id.GAME);
         TextView contador = (TextView)this.findViewById(R.id.CONTADOR_MOVIMIENTOS);
-        TextView estado = (TextView)this.findViewById(R.id.ESTADO_JUEGO);
+        estado = (TextView)this.findViewById(R.id.ESTADO_JUEGO);
         game_view.setDependentViews(contador,  estado);
         // game_view.setOnKeyListener(this);
         game_view.iniciarNuevoJuego(escenario);
@@ -103,6 +106,11 @@ public class NewGameActivity extends Activity {
     	
     	game_view.update();
 
+    	if (escenario.todosLosDestinosOcupados()){
+    		this.estado.setVisibility(View.VISIBLE);
+    		this.estado.setText("NIVEL COMPLETO");
+    	}
+    	
         return super.onKeyDown(keyCode, msg);
     }
 }

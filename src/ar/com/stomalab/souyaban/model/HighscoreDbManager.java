@@ -9,12 +9,10 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class HighscoreDbManager extends SQLiteOpenHelper {
 	public static final String NOMBRE_DB = "highscore.db";
 	public static final String NOMBRE_TABLA = "highscore";
-	public static final String COLUMNA_ID = "id";
 	public static final String COLUMNA_LEVELSET = "levelset";
 	public static final String COLUMNA_NIVEL = "nivel";
 	public static final String COLUMNA_MOVIMIENTOS = "movimientos";
@@ -23,13 +21,13 @@ public class HighscoreDbManager extends SQLiteOpenHelper {
 	
 	private SQLiteDatabase database;
 	
-	private String[] todas_las_columnas = {COLUMNA_ID, 	COLUMNA_LEVELSET, COLUMNA_NIVEL, COLUMNA_MOVIMIENTOS};
+	private String[] todas_las_columnas = {COLUMNA_LEVELSET, COLUMNA_NIVEL, COLUMNA_MOVIMIENTOS};
 
 	// Database creation sql statement
 	private static final String DATABASE_CREATE = "create table "
 	      + NOMBRE_TABLA + "(" + COLUMNA_LEVELSET + " text not null, " +
-								 COLUMNA_NIVEL + " integer, " +
-								 COLUMNA_MOVIMIENTOS + " integer, " +
+								 COLUMNA_NIVEL + " integer not null, " +
+								 COLUMNA_MOVIMIENTOS + " integer not null, " +
 								 "primary key (" + COLUMNA_LEVELSET + ", " + COLUMNA_MOVIMIENTOS + "));";
 								 
 	
@@ -40,7 +38,6 @@ public class HighscoreDbManager extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(DATABASE_CREATE);
-		Log.d("ONCREATE", "CREANDO TABLA:" + DATABASE_CREATE);
 	}
 
 	@Override
@@ -48,31 +45,46 @@ public class HighscoreDbManager extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + NOMBRE_TABLA);
 		onCreate(db);
 	}
-		
-	public void open() throws SQLException {
+			
+	public void openDb() throws SQLException {
 		database = this.getWritableDatabase();
-		Log.d("HIGHSCORE DB", "GETTING WRITABLE DB");
 	}
 	
-	 public void close() {
+	 public void closeDb() {
 		 this.close();
 	 }
 
 	 public void agregarHighscore(HighscoreEntry highscore_entry) {
-		 SQLiteDatabase db = this.getWritableDatabase();
+		 // SQLiteDatabase db = this.getWritableDatabase();
 		 
 		 ContentValues values = new ContentValues();
 		 values.put(COLUMNA_LEVELSET, highscore_entry.getLevelset());
 		 values.put(COLUMNA_NIVEL, highscore_entry.getNivel());
 		 values.put(COLUMNA_MOVIMIENTOS, highscore_entry.getMovimientos());
-		 
-		 db.insert(NOMBRE_TABLA, null, values);
-		 db.close();
+		 	
+		 database.insert(NOMBRE_TABLA, null, values);
+		 // db.close();
 	 }
 	 
 	 public void deleteHighscore(HighscoreEntry highscore_entry) {
-		 // database.delete(MySQLiteHelper.TABLE_COMMENTS, MySQLiteHelper.COLUMN_ID + " = " + id, null);
+		 database.delete(NOMBRE_TABLA, COLUMNA_LEVELSET + " = \"" + highscore_entry.getLevelset() + "\" and " + COLUMNA_NIVEL + " = " + highscore_entry.getNivel(), null);
+		 // database.delete(NOMBRE_TABLA, COLUMNA_LEVELSET + " = \"?\" and " + COLUMNA_NIVEL + " = ?" , new String[]{highscore_entry.getLevelset(), String.valueOf(highscore_entry.getNivel())});
 	 }
+	 
+	 public void deleteHighscore(String levelset, int nivel) {
+		 database.delete(NOMBRE_TABLA, COLUMNA_LEVELSET + " = \"?\" and " + COLUMNA_NIVEL + " = ?" , new String[]{levelset, String.valueOf(nivel)});
+	 }
+	 
+	// Updating highscore
+	public int updateHighscore(HighscoreEntry highscore_entry) {
+		ContentValues values = new ContentValues();
+		values.put(COLUMNA_MOVIMIENTOS, highscore_entry.getMovimientos());
+		// values.put(KEY_PH_NO, contact.getPhoneNumber());
+ 
+        // updating row
+        return database.update(NOMBRE_TABLA, values, COLUMNA_LEVELSET + " = \"" + highscore_entry.getLevelset() + "\" and " +
+        		COLUMNA_NIVEL + " = " + String.valueOf(highscore_entry.getNivel()), null);
+	}
 
 	public List<HighscoreEntry> getHighscoreCompleto() {
 		List<HighscoreEntry> highscore_completo = new ArrayList<HighscoreEntry>();
@@ -88,12 +100,28 @@ public class HighscoreDbManager extends SQLiteOpenHelper {
 		cursor.close();
 		return highscore_completo;
 	}
+	
+	public List<HighscoreEntry> getHighscoreLevelset(String levelset) {
+		List<HighscoreEntry> highscore_completo = new ArrayList<HighscoreEntry>();
+		
+		Cursor cursor = database.query(NOMBRE_TABLA, todas_las_columnas, COLUMNA_LEVELSET + "='" + levelset + "'", null, null, null, null);
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			HighscoreEntry highscore_entry= cursorToHighscoreEntry(cursor);
+			highscore_completo.add(highscore_entry);
+			cursor.moveToNext();
+		}
+		
+		// Make sure to close the cursor
+		cursor.close();
+		return highscore_completo;
+	}
 
 	private HighscoreEntry cursorToHighscoreEntry(Cursor cursor) {
 		HighscoreEntry highscore_entry = new HighscoreEntry();
-		highscore_entry.setLevelset(cursor.getString(1));
-		highscore_entry.setNivel(cursor.getInt(2));
-		highscore_entry.setMovimientos(cursor.getInt(3));
+		highscore_entry.setLevelset(cursor.getString(0));
+		highscore_entry.setNivel(cursor.getInt(1));
+		highscore_entry.setMovimientos(cursor.getInt(2));
 		return highscore_entry;
 	}
 }
