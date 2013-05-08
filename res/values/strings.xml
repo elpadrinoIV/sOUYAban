@@ -12,5 +12,7 @@
         Bla12\n\nBla13\n\nBla14\n\nBla15\n\nBla16\n\nBla17\n\nBla18\n\nBla19\n\nBla20</string>
     <string name="title_activity_new_game">Play</string>
     <string name="moves">Movimientos: </string>
+    <string name="title_activity_highscore">HighscoreActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

@@ -35,4 +35,9 @@ public class MainActivity extends Activity {
     public void showAbout(View view) {
         // 
     }
+    
+    public void showHighscore(View view) {
+    	Intent intent = new Intent(this, HighscoreActivity.class);
+    	startActivity(intent);
+    }
 }

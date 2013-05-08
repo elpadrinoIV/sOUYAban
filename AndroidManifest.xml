@@ -38,6 +38,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ar.com.stomalab.souyaban.MainActivity" />
         </activity>
+        <activity
+            android:name="ar.com.stomalab.souyaban.HighscoreActivity"
+            android:label="@string/title_activity_highscore" >
+        </activity>
     </application>
 
 </manifest>
