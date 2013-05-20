@@ -1,7 +1,8 @@
 package ar.com.stomalab.souyaban.model.tests;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertFalse;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import ar.com.stomalab.souyaban.model.Caja;
@@ -9,10 +10,11 @@ import ar.com.stomalab.souyaban.model.Destino;
 import ar.com.stomalab.souyaban.model.Escenario;
 import ar.com.stomalab.souyaban.model.Pared;
 
-public class TestNivelIncompleto extends TestCase {
+public class TestNivelIncompleto {
 
 	Escenario escenario;
 	
+	@Before
 	public void setUp(){
 		// #####
 		// #.  #

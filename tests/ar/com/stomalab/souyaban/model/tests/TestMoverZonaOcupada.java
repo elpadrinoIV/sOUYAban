@@ -1,12 +1,18 @@
 package ar.com.stomalab.souyaban.model.tests;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
+import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-import ar.com.stomalab.souyaban.model.*;
+import ar.com.stomalab.souyaban.model.Escenario;
+import ar.com.stomalab.souyaban.model.Pared;
+import ar.com.stomalab.souyaban.model.Persona;
 
-public class TestMoverZonaOcupada extends TestCase {
+public class TestMoverZonaOcupada{
 	Escenario escenario;
 		
+	@Before
 	public void setUp(){
 		// #####
 	    // #   #

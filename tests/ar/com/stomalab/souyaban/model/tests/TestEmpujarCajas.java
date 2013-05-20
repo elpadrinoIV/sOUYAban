@@ -1,7 +1,8 @@
 package ar.com.stomalab.souyaban.model.tests;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import ar.com.stomalab.souyaban.model.Caja;
@@ -9,10 +10,11 @@ import ar.com.stomalab.souyaban.model.Escenario;
 import ar.com.stomalab.souyaban.model.Pared;
 import ar.com.stomalab.souyaban.model.Persona;
 
-public class TestEmpujarCajas extends TestCase {
+public class TestEmpujarCajas{
 
 	Escenario escenario;
 	
+	@Before
 	public void setUp(){
 		// #####
 		// #   #
