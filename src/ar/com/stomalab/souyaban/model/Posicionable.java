@@ -1,24 +1,26 @@
 package ar.com.stomalab.souyaban.model;
 
 public abstract class Posicionable {
-	private int x;
-	private int y;
+	Posicion posicion;
 	
 	public Posicionable(){
-		this.x = 0;
-		this.y = 0;
+		this.posicion = new Posicion(0, 0);
 	}
 	
 	public void setPosicion(int x, int y){
-		this.x = x;
-		this.y = y;
+		this.posicion.setX(x);
+		this.posicion.setY(y);
 	}
 	
 	public int getX(){
-		return this.x;
+		return this.posicion.getX();
 	}
 	
 	public int getY(){
-		return this.y; 
+		return this.posicion.getY();
+	}
+	
+	public Posicion getPosicion() {
+		return this.posicion;
 	}
 }

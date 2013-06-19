@@ -1,8 +1,12 @@
 package ar.com.stomalab.souyaban.model.tests;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.junit.Before;
+import org.hamcrest.TypeSafeMatcher;
 import org.junit.Test;
 
 import ar.com.stomalab.souyaban.model.Caja;
@@ -11,6 +15,7 @@ import ar.com.stomalab.souyaban.model.Escenario;
 import ar.com.stomalab.souyaban.model.JugadorAutomatico;
 import ar.com.stomalab.souyaban.model.Pared;
 import ar.com.stomalab.souyaban.model.Persona;
+import ar.com.stomalab.souyaban.model.Posicion;
 
 public class TestDeshacer{
 
@@ -71,8 +76,7 @@ public class TestDeshacer{
 		JugadorAutomatico jugador_automatico = new JugadorAutomatico();
 		jugador_automatico.setEscenario(this.escenario);
 		
-		int x_inicial = this.escenario.getPersona().getX();
-		int y_inicial = this.escenario.getPersona().getY();
+		Posicion pos_inicial = this.escenario.getPersona().getPosicion();
 		String instrucciones = "RULLLDD";
 		
 		jugador_automatico.ejecutarInstrucciones(instrucciones);
@@ -81,11 +85,8 @@ public class TestDeshacer{
 			this.escenario.deshacer();
 		}
 		
-		int x_final = this.escenario.getPersona().getX();
-		int y_final = this.escenario.getPersona().getY();
-		
-		assertEquals("El jugador deberia haber quedado en la misma pos_x", x_inicial, x_final);
-		assertEquals("El jugador deberia haber quedado en la misma pos_y", y_inicial, y_final);
+		Posicion pos_final = this.escenario.getPersona().getPosicion();
+		assertThat(pos_final, equalTo(pos_inicial));
 	}
 	
 	@Test
@@ -100,38 +101,26 @@ public class TestDeshacer{
 		
 		this.escenario.deshacer();
 		
-		int x_esperado = 3;
-		int y_esperado = 3;
+		Posicion posicion_esperada = new Posicion(3, 3);
 		
-		int x = this.escenario.getPersona().getX();
-		int y = this.escenario.getPersona().getY();
-		
-		assertEquals("El jugador deberia haber quedado en otra pos_x", x_esperado, x);
-		assertEquals("El jugador deberia haber quedado en otra pos_y", y_esperado, y);
-		
+		assertThat(this.escenario.getPersona().getPosicion(), equalTo(posicion_esperada));
+	
 		for (int i = 0; i < 3; i++){
 			this.escenario.deshacer();
 		}
 		
-		x_esperado = 5;
-		y_esperado = 2;
+		posicion_esperada.setPosicion(5, 2);
 
-		x = this.escenario.getPersona().getX();
-		y = this.escenario.getPersona().getY();
-		
-		assertEquals("El jugador deberia haber quedado en otra pos_x", x_esperado, x);
-		assertEquals("El jugador deberia haber quedado en otra pos_y", y_esperado, y);
-		
+		assertThat(this.escenario.getPersona().getPosicion(), equalTo(posicion_esperada));
 	}
-	
+
 	@Test
 	public void test12A03DeshacerMasUndosQueMovimientos(){
 		// Mover por zona libre (7 movimientos), 1 undo, 3 undos
 		JugadorAutomatico jugador_automatico = new JugadorAutomatico();
 		jugador_automatico.setEscenario(this.escenario);
-		
-		int x_inicial = this.escenario.getPersona().getX();
-		int y_inicial = this.escenario.getPersona().getY();
+
+		Posicion pos_inicial = this.escenario.getPersona().getPosicion();
 		
 		String instrucciones = "RULLLDD";
 		
@@ -143,13 +132,9 @@ public class TestDeshacer{
 			this.escenario.deshacer();
 		}		
 		
-		int x_final = this.escenario.getPersona().getX();
-		int y_final = this.escenario.getPersona().getY();
-		
-		assertEquals("El jugador deberia haber quedado en la misma pos_x", x_inicial, x_final);
-		assertEquals("El jugador deberia haber quedado en la misma pos_y", y_inicial, y_final);
+		assertThat(this.escenario.getPersona().getPosicion(), equalTo(pos_inicial));
 	}
-	
+
 	@Test
 	public void test12A04DeshacerZonasTrabadasNoCuentan(){
 		// Mover por zonas libres y trabadas, mover en zona trabada no cuenta para undo.
@@ -161,42 +146,25 @@ public class TestDeshacer{
 		
 		this.escenario.deshacer();
 		
-		int x_esperado = 6;
-		int y_esperado = 3;
+		Posicion pos_esperada = new Posicion(6, 3);
 		
-		int x = this.escenario.getPersona().getX();
-		int y = this.escenario.getPersona().getY();
-		
-		assertEquals("El jugador deberia haber quedado en otra pos_x", x_esperado, x);
-		assertEquals("El jugador deberia haber quedado en otra pos_y", y_esperado, y);
-		
+		assertThat(this.escenario.getPersona().getPosicion(), equalTo(pos_esperada));
 		
 		instrucciones = "DDDDDDDDDDDLLUUU";
 		jugador_automatico.ejecutarInstrucciones(instrucciones);
 
 		this.escenario.deshacer();
 		
-		x_esperado = 4;
-		y_esperado = 3;
+		pos_esperada.setPosicion(4, 3);
 		
-		x = this.escenario.getPersona().getX();
-		y = this.escenario.getPersona().getY();
-		
-		assertEquals("El jugador deberia haber quedado en otra pos_x", x_esperado, x);
-		assertEquals("El jugador deberia haber quedado en otra pos_y", y_esperado, y);
+		assertThat(this.escenario.getPersona().getPosicion(), equalTo(pos_esperada));
 		
 		for (int i = 0; i < 5; i++){
 			this.escenario.deshacer();
 		}
 
-		x_esperado = 6;
-		y_esperado = 4;
-
-		x = this.escenario.getPersona().getX();
-		y = this.escenario.getPersona().getY();
-
-		assertEquals("El jugador deberia haber quedado en otra pos_x", x_esperado, x);
-		assertEquals("El jugador deberia haber quedado en otra pos_y", y_esperado, y);		
+		pos_esperada.setPosicion(6, 4);
+		assertThat(this.escenario.getPersona().getPosicion(), equalTo(pos_esperada));
 	}
 	
 	@Test
@@ -209,40 +177,48 @@ public class TestDeshacer{
 		jugador_automatico.ejecutarInstrucciones(instrucciones);
 		
 		this.escenario.deshacer();
+	
+		Posicion pos_esperada_persona = new Posicion(6, 3);
 		
-		int x_esperado = 6;
-		int y_esperado = 3;
-		
-		int x = this.escenario.getPersona().getX();
-		int y = this.escenario.getPersona().getY();
-		
-		assertEquals("El jugador deberia haber quedado en otra pos_x", x_esperado, x);
-		assertEquals("El jugador deberia haber quedado en otra pos_y", y_esperado, y);
-		
+		assertThat(this.escenario.getPersona().getPosicion(), equalTo(pos_esperada_persona));
 		
 		instrucciones = "LDDDDDDDD";
 		jugador_automatico.ejecutarInstrucciones(instrucciones);
 		
 		this.escenario.deshacer();
 		
-		int x_esperado_persona = 5;
-		int y_esperado_persona = 3;
+		pos_esperada_persona.setPosicion(5,  3);
+		
+		Posicion pos_esperada_caja = new Posicion(5, 4);
 
-		int x_esperado_caja = 5;
-		int y_esperado_caja = 4;
-
-		boolean caja_en_posicion_correcta = false;
-		for (Caja caja : this.escenario.getCajas()){
-			if (caja.getX() == x_esperado_caja && caja.getY() == y_esperado_caja){
-				caja_en_posicion_correcta = true;
-			}
-		}
-			
-		int x_persona = this.escenario.getPersona().getX();
-		int y_persona = this.escenario.getPersona().getY();
-
-		assertEquals("El jugador deberia haber quedado en otra pos_x", x_esperado_persona, x_persona);
-		assertEquals("El jugador deberia haber quedado en otra pos_y", y_esperado_persona, y_persona);
-		assertTrue("No hay cajas en " + x_esperado_caja +", " + y_esperado_caja, caja_en_posicion_correcta);
+		assertThat(this.escenario.getPersona().getPosicion(), equalTo(pos_esperada_persona));
+		assertThat(this.escenario, shouldHaveBoxIn(pos_esperada_caja));
+		//assertTrue("No hay cajas en " + x_esperado_caja +", " + y_esperado_caja, caja_en_posicion_correcta);
 	}
+	
+	private static Matcher<Escenario> shouldHaveBoxIn(final Posicion posicion) {
+	      
+		return new TypeSafeMatcher<Escenario>() {
+	        @Override
+	        public void describeTo(Description description) { 
+	        	description.appendText("Caja en (" + posicion.getX() + ", " + posicion.getY() + ")");
+	        }
+	        
+	        @Override
+	        public boolean matchesSafely(Escenario escenario) { 
+	        	boolean caja_en_posicion_correcta = false;
+	    		for (Caja caja : escenario.getCajas()){
+	    			if (caja.getX() == posicion.getX() && caja.getY() == posicion.getY()){
+	    				caja_en_posicion_correcta = true;
+	    			}
+	    		}
+	    		
+	    		return caja_en_posicion_correcta;
+	        }
+	        
+	        public void describeMismatchSafely(Escenario escenario, Description mismatchDescription) {
+	            mismatchDescription.appendText("no hay caja ahi");
+	          } 
+	      };
+	    }
 }

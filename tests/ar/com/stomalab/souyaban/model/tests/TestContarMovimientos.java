@@ -1,6 +1,7 @@
 package ar.com.stomalab.souyaban.model.tests;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -75,7 +76,7 @@ public class TestContarMovimientos {
 		
 		jugador_automatico.ejecutarInstrucciones(instrucciones);
 		
-		assertEquals("Cantidad de movimientos erroneos", instrucciones.length(), this.escenario.getPersona().getCantidadMovimientos() );
+		assertThat("Cantidad de movimientos", this.escenario.getPersona().getCantidadMovimientos(), equalTo(instrucciones.length()));
 	}
 	
 	@Test
@@ -87,7 +88,7 @@ public class TestContarMovimientos {
 		
 		jugador_automatico.ejecutarInstrucciones(instrucciones);
 		
-		assertEquals("Cantidad de movimientos erroneos", instrucciones.length(), this.escenario.getPersona().getCantidadMovimientos() );
+		assertThat("Cantidad de movimientos", this.escenario.getPersona().getCantidadMovimientos(), equalTo(instrucciones.length()));
 	}
 	
 	@Test
@@ -100,6 +101,6 @@ public class TestContarMovimientos {
 		
 		jugador_automatico.ejecutarInstrucciones(instrucciones);
 		
-		assertEquals("Cantidad de movimientos erroneos", cantidad_movimientos_reales, this.escenario.getPersona().getCantidadMovimientos() );
+		assertThat("Cantidad de movimientos", this.escenario.getPersona().getCantidadMovimientos(), equalTo(cantidad_movimientos_reales));
 	}
 }
