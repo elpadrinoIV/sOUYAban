@@ -33,6 +33,12 @@ public class Posicion {
 		this.y = y;
 	}
 	
+	public Posicion plus(Posicion posicion) {
+		Posicion p = new Posicion(0, 0);
+		p.setPosicion(this.getX() + posicion.getX(), this.getY() + posicion.getY());
+		return p;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
         if (obj == null)

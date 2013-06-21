@@ -2,11 +2,7 @@ package ar.com.stomalab.souyaban.model.tests;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.junit.Before;
-import org.hamcrest.TypeSafeMatcher;
 import org.junit.Test;
 
 import ar.com.stomalab.souyaban.model.Caja;
@@ -17,6 +13,7 @@ import ar.com.stomalab.souyaban.model.Pared;
 import ar.com.stomalab.souyaban.model.Persona;
 import ar.com.stomalab.souyaban.model.Posicion;
 
+import static ar.com.stomalab.souyaban.model.tests.TieneElementosEscenario.deberiaTenerCajaEn;;
 public class TestDeshacer{
 
 	Escenario escenario;
@@ -192,33 +189,7 @@ public class TestDeshacer{
 		Posicion pos_esperada_caja = new Posicion(5, 4);
 
 		assertThat(this.escenario.getPersona().getPosicion(), equalTo(pos_esperada_persona));
-		assertThat(this.escenario, shouldHaveBoxIn(pos_esperada_caja));
+		assertThat(this.escenario, deberiaTenerCajaEn(pos_esperada_caja));
 		//assertTrue("No hay cajas en " + x_esperado_caja +", " + y_esperado_caja, caja_en_posicion_correcta);
 	}
-	
-	private static Matcher<Escenario> shouldHaveBoxIn(final Posicion posicion) {
-	      
-		return new TypeSafeMatcher<Escenario>() {
-	        @Override
-	        public void describeTo(Description description) { 
-	        	description.appendText("Caja en (" + posicion.getX() + ", " + posicion.getY() + ")");
-	        }
-	        
-	        @Override
-	        public boolean matchesSafely(Escenario escenario) { 
-	        	boolean caja_en_posicion_correcta = false;
-	    		for (Caja caja : escenario.getCajas()){
-	    			if (caja.getX() == posicion.getX() && caja.getY() == posicion.getY()){
-	    				caja_en_posicion_correcta = true;
-	    			}
-	    		}
-	    		
-	    		return caja_en_posicion_correcta;
-	        }
-	        
-	        public void describeMismatchSafely(Escenario escenario, Description mismatchDescription) {
-	            mismatchDescription.appendText("no hay caja ahi");
-	          } 
-	      };
-	    }
 }

@@ -1,7 +1,7 @@
 package ar.com.stomalab.souyaban.model.tests;
 
-import static org.junit.Assert.*;
-
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,6 +9,7 @@ import ar.com.stomalab.souyaban.model.Caja;
 import ar.com.stomalab.souyaban.model.Escenario;
 import ar.com.stomalab.souyaban.model.Pared;
 import ar.com.stomalab.souyaban.model.Persona;
+import ar.com.stomalab.souyaban.model.Posicion;
 
 public class TestEmpujarCajas{
 
@@ -56,20 +57,15 @@ public class TestEmpujarCajas{
 		Persona persona = new Persona(4, 3);
 		persona.setEscenario(this.escenario);
 			    
-	    int x_original_caja = caja.getX();
-	    int y_original_caja = caja.getY();
-	    int x_original_persona = persona.getX();
-	    int y_original_persona = persona.getY();
+		Posicion pos_esperada_caja = caja.getPosicion().plus(new Posicion(-1, 0));
+		Posicion pos_esperada_persona = persona.getPosicion().plus(new Posicion(-1, 0));
 	    persona.moverIzquierda();
-	    int x_nuevo_caja = caja.getX();
-	    int y_nuevo_caja = caja.getY();
-	    int x_nuevo_persona = persona.getX();
-	    int y_nuevo_persona = persona.getY();
+	    
+	    Posicion pos_nueva_caja = caja.getPosicion();
+	    Posicion pos_nueva_persona = persona.getPosicion();
 
-	    assertEquals("la caja no se movio a la izquierda", x_original_caja - 1, x_nuevo_caja);
-	    assertEquals("la caja no se tiene que mover en y", y_original_caja, y_nuevo_caja);
-	    assertEquals("el tipito no se movio a la izquierda", x_original_persona - 1, x_nuevo_persona);
-	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	    assertThat(pos_nueva_caja, equalTo(pos_esperada_caja));
+	    assertThat(pos_nueva_persona, equalTo(pos_esperada_persona));	
 	}
 	
 	@Test
@@ -81,22 +77,17 @@ public class TestEmpujarCajas{
 		Persona persona = new Persona(2, 3);
 		persona.setEscenario(this.escenario);
 			    
-	    int x_original_caja = caja.getX();
-	    int y_original_caja = caja.getY();
-	    int x_original_persona = persona.getX();
-	    int y_original_persona = persona.getY();
+		Posicion pos_esperada_caja = caja.getPosicion().plus(new Posicion(1, 0));
+		Posicion pos_esperada_persona = persona.getPosicion().plus(new Posicion(1, 0));
 	    persona.moverDerecha();
-	    int x_nuevo_caja = caja.getX();
-	    int y_nuevo_caja = caja.getY();
-	    int x_nuevo_persona = persona.getX();
-	    int y_nuevo_persona = persona.getY();
+	    
+	    Posicion pos_nueva_caja = caja.getPosicion();
+	    Posicion pos_nueva_persona = persona.getPosicion();
 
-	    assertEquals("la caja no se movio a la derecha", x_original_caja + 1, x_nuevo_caja);
-	    assertEquals("la caja no se tiene que mover en y", y_original_caja, y_nuevo_caja);
-	    assertEquals("el tipito no se movio a la derecha	", x_original_persona + 1, x_nuevo_persona);
-	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	    assertThat(pos_nueva_caja, equalTo(pos_esperada_caja));
+	    assertThat(pos_nueva_persona, equalTo(pos_esperada_persona));
 	}
-	
+
 	@Test
 	public void test05A03EmpujarCajaArribaLibre(){
 		Caja caja = new Caja(3, 3);
@@ -106,20 +97,15 @@ public class TestEmpujarCajas{
 		Persona persona = new Persona(3, 4);
 		persona.setEscenario(this.escenario);
 			    
-	    int x_original_caja = caja.getX();
-	    int y_original_caja = caja.getY();
-	    int x_original_persona = persona.getX();
-	    int y_original_persona = persona.getY();
+		Posicion pos_esperada_caja = caja.getPosicion().plus(new Posicion(0, -1));
+		Posicion pos_esperada_persona = persona.getPosicion().plus(new Posicion(0, -1));
 	    persona.moverArriba();
-	    int x_nuevo_caja = caja.getX();
-	    int y_nuevo_caja = caja.getY();
-	    int x_nuevo_persona = persona.getX();
-	    int y_nuevo_persona = persona.getY();
+	    
+	    Posicion pos_nueva_caja = caja.getPosicion();
+	    Posicion pos_nueva_persona = persona.getPosicion();
 
-	    assertEquals("la caja no se tiene que mover en x", x_original_caja, x_nuevo_caja);
-	    assertEquals("la caja no se movio arriba", y_original_caja - 1, y_nuevo_caja);
-	    assertEquals("el tipito no se tiene que mover en x", x_original_persona, x_nuevo_persona);
-	    assertEquals("el tipito no se movio arriba", y_original_persona - 1, y_nuevo_persona);
+	    assertThat(pos_nueva_caja, equalTo(pos_esperada_caja));
+	    assertThat(pos_nueva_persona, equalTo(pos_esperada_persona));
 	}
 
 	@Test
@@ -131,22 +117,17 @@ public class TestEmpujarCajas{
 		Persona persona = new Persona(3, 2);
 		persona.setEscenario(this.escenario);
 			    
-	    int x_original_caja = caja.getX();
-	    int y_original_caja = caja.getY();
-	    int x_original_persona = persona.getX();
-	    int y_original_persona = persona.getY();
+		Posicion pos_esperada_caja = caja.getPosicion().plus(new Posicion(0, 1));
+		Posicion pos_esperada_persona = persona.getPosicion().plus(new Posicion(0, 1));
 	    persona.moverAbajo();
-	    int x_nuevo_caja = caja.getX();
-	    int y_nuevo_caja = caja.getY();
-	    int x_nuevo_persona = persona.getX();
-	    int y_nuevo_persona = persona.getY();
+	    
+	    Posicion pos_nueva_caja = caja.getPosicion();
+	    Posicion pos_nueva_persona = persona.getPosicion();
 
-	    assertEquals("la caja no se tiene que mover en x", x_original_caja, x_nuevo_caja);
-	    assertEquals("la caja no se movio abajo", y_original_caja + 1, y_nuevo_caja);
-	    assertEquals("el tipito no se tiene que mover en x", x_original_persona, x_nuevo_persona);
-	    assertEquals("el tipito no se movio abajo", y_original_persona + 1, y_nuevo_persona);
+	    assertThat(pos_nueva_caja, equalTo(pos_esperada_caja));
+	    assertThat(pos_nueva_persona, equalTo(pos_esperada_persona));
 	}
-	
+
 	@Test
 	public void test05A05EmpujarCajaIzquierdaOcupadoConPared(){
 		Caja caja = new Caja(2, 3);
@@ -156,20 +137,15 @@ public class TestEmpujarCajas{
 		Persona persona = new Persona(3, 3);
 		persona.setEscenario(this.escenario);
 			    
-	    int x_original_caja = caja.getX();
-	    int y_original_caja = caja.getY();
-	    int x_original_persona = persona.getX();
-	    int y_original_persona = persona.getY();
+		Posicion pos_esperada_caja = caja.getPosicion();
+		Posicion pos_esperada_persona = persona.getPosicion();
 	    persona.moverIzquierda();
-	    int x_nuevo_caja = caja.getX();
-	    int y_nuevo_caja = caja.getY();
-	    int x_nuevo_persona = persona.getX();
-	    int y_nuevo_persona = persona.getY();
+	    
+	    Posicion pos_nueva_caja = caja.getPosicion();
+	    Posicion pos_nueva_persona = persona.getPosicion();
 
-	    assertEquals("la caja no se tiene que mover en x", x_original_caja, x_nuevo_caja);
-	    assertEquals("la caja no se tiene que mover en y", y_original_caja, y_nuevo_caja);
-	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
-	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	    assertThat(pos_nueva_caja, equalTo(pos_esperada_caja));
+	    assertThat(pos_nueva_persona, equalTo(pos_esperada_persona));
 	}
 	
 	@Test
@@ -180,21 +156,15 @@ public class TestEmpujarCajas{
 		
 		Persona persona = new Persona(4, 3);
 		persona.setEscenario(this.escenario);
-			    
-	    int x_original_caja = caja.getX();
-	    int y_original_caja = caja.getY();
-	    int x_original_persona = persona.getX();
-	    int y_original_persona = persona.getY();
+		Posicion pos_esperada_caja = caja.getPosicion();
+		Posicion pos_esperada_persona = persona.getPosicion();
 	    persona.moverDerecha();
-	    int x_nuevo_caja = caja.getX();
-	    int y_nuevo_caja = caja.getY();
-	    int x_nuevo_persona = persona.getX();
-	    int y_nuevo_persona = persona.getY();
+	    
+	    Posicion pos_nueva_caja = caja.getPosicion();
+	    Posicion pos_nueva_persona = persona.getPosicion();
 
-	    assertEquals("la caja no se tiene que mover en x", x_original_caja, x_nuevo_caja);
-	    assertEquals("la caja no se tiene que mover en y", y_original_caja, y_nuevo_caja);
-	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
-	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	    assertThat(pos_nueva_caja, equalTo(pos_esperada_caja));
+	    assertThat(pos_nueva_persona, equalTo(pos_esperada_persona));
 	}
 	
 	@Test
@@ -206,20 +176,15 @@ public class TestEmpujarCajas{
 		Persona persona = new Persona(3, 3);
 		persona.setEscenario(this.escenario);
 			    
-	    int x_original_caja = caja.getX();
-	    int y_original_caja = caja.getY();
-	    int x_original_persona = persona.getX();
-	    int y_original_persona = persona.getY();
+		Posicion pos_esperada_caja = caja.getPosicion();
+		Posicion pos_esperada_persona = persona.getPosicion();
 	    persona.moverArriba();
-	    int x_nuevo_caja = caja.getX();
-	    int y_nuevo_caja = caja.getY();
-	    int x_nuevo_persona = persona.getX();
-	    int y_nuevo_persona = persona.getY();
+	    
+	    Posicion pos_nueva_caja = caja.getPosicion();
+	    Posicion pos_nueva_persona = persona.getPosicion();
 
-	    assertEquals("la caja no se tiene que mover en x", x_original_caja, x_nuevo_caja);
-	    assertEquals("la caja no se tiene que mover en y", y_original_caja, y_nuevo_caja);
-	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
-	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	    assertThat(pos_nueva_caja, equalTo(pos_esperada_caja));
+	    assertThat(pos_nueva_persona, equalTo(pos_esperada_persona));
 	}
 	
 	@Test
@@ -231,20 +196,16 @@ public class TestEmpujarCajas{
 		Persona persona = new Persona(3, 4);
 		persona.setEscenario(this.escenario);
 			    
-	    int x_original_caja = caja.getX();
-	    int y_original_caja = caja.getY();
-	    int x_original_persona = persona.getX();
-	    int y_original_persona = persona.getY();
+		Posicion pos_esperada_caja = caja.getPosicion();
+		Posicion pos_esperada_persona = persona.getPosicion();
 	    persona.moverAbajo();
-	    int x_nuevo_caja = caja.getX();
-	    int y_nuevo_caja = caja.getY();
-	    int x_nuevo_persona = persona.getX();
-	    int y_nuevo_persona = persona.getY();
+	    
+	    Posicion pos_nueva_caja = caja.getPosicion();
+	    Posicion pos_nueva_persona = persona.getPosicion();
 
-	    assertEquals("la caja no se tiene que mover en x", x_original_caja, x_nuevo_caja);
-	    assertEquals("la caja no se tiene que mover en y", y_original_caja, y_nuevo_caja);
-	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
-	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	    assertThat(pos_nueva_caja, equalTo(pos_esperada_caja));
+	    assertThat(pos_nueva_persona, equalTo(pos_esperada_persona));
+
 	}
 	
 	@Test
@@ -259,27 +220,20 @@ public class TestEmpujarCajas{
 		
 		Persona persona = new Persona(5, 3);
 		persona.setEscenario(this.escenario);
-			    
-	    int x_original_caja_izq = caja_izq.getX();
-	    int y_original_caja_izq = caja_izq.getY();
-	    int x_original_caja_der = caja_der.getX();
-	    int y_original_caja_der = caja_der.getY();
-	    int x_original_persona = persona.getX();
-	    int y_original_persona = persona.getY();
-	    persona.moverIzquierda();
-	    int x_nuevo_caja_izq = caja_izq.getX();
-	    int y_nuevo_caja_izq = caja_izq.getY();
-	    int x_nuevo_caja_der = caja_der.getX();
-	    int y_nuevo_caja_der = caja_der.getY();
-	    int x_nuevo_persona = persona.getX();
-	    int y_nuevo_persona = persona.getY();
+	
+		Posicion pos_esperada_caja_izq = caja_izq.getPosicion();
+		Posicion pos_esperada_caja_der = caja_der.getPosicion();
+		Posicion pos_esperada_persona = persona.getPosicion();
+	    
+		persona.moverIzquierda();
+	    
+	    Posicion pos_nueva_caja_izq = caja_izq.getPosicion();
+	    Posicion pos_nueva_caja_der = caja_der.getPosicion();
+	    Posicion pos_nueva_persona = persona.getPosicion();
 
-	    assertEquals("la caja no se tiene que mover en x", x_original_caja_izq, x_nuevo_caja_izq);
-	    assertEquals("la caja no se tiene que mover en y", y_original_caja_izq, y_nuevo_caja_izq);
-	    assertEquals("la caja no se tiene que mover en x", x_original_caja_der, x_nuevo_caja_der);
-	    assertEquals("la caja no se tiene que mover en y", y_original_caja_der, y_nuevo_caja_der);
-	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
-	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	    assertThat(pos_nueva_caja_izq, equalTo(pos_esperada_caja_izq));
+	    assertThat(pos_nueva_caja_der, equalTo(pos_esperada_caja_der));
+	    assertThat(pos_nueva_persona, equalTo(pos_esperada_persona));
 	}
 	
 	@Test
@@ -295,26 +249,19 @@ public class TestEmpujarCajas{
 		Persona persona = new Persona(2, 3);
 		persona.setEscenario(this.escenario);
 			    
-	    int x_original_caja_izq = caja_izq.getX();
-	    int y_original_caja_izq = caja_izq.getY();
-	    int x_original_caja_der = caja_der.getX();
-	    int y_original_caja_der = caja_der.getY();
-	    int x_original_persona = persona.getX();
-	    int y_original_persona = persona.getY();
-	    persona.moverDerecha();
-	    int x_nuevo_caja_izq = caja_izq.getX();
-	    int y_nuevo_caja_izq = caja_izq.getY();
-	    int x_nuevo_caja_der = caja_der.getX();
-	    int y_nuevo_caja_der = caja_der.getY();
-	    int x_nuevo_persona = persona.getX();
-	    int y_nuevo_persona = persona.getY();
+		Posicion pos_esperada_caja_izq = caja_izq.getPosicion();
+		Posicion pos_esperada_caja_der = caja_der.getPosicion();
+		Posicion pos_esperada_persona = persona.getPosicion();
+	
+		persona.moverDerecha();
+	    
+	    Posicion pos_nueva_caja_izq = caja_izq.getPosicion();
+	    Posicion pos_nueva_caja_der = caja_der.getPosicion();
+	    Posicion pos_nueva_persona = persona.getPosicion();
 
-	    assertEquals("la caja no se tiene que mover en x", x_original_caja_izq, x_nuevo_caja_izq);
-	    assertEquals("la caja no se tiene que mover en y", y_original_caja_izq, y_nuevo_caja_izq);
-	    assertEquals("la caja no se tiene que mover en x", x_original_caja_der, x_nuevo_caja_der);
-	    assertEquals("la caja no se tiene que mover en y", y_original_caja_der, y_nuevo_caja_der);
-	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
-	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	    assertThat(pos_nueva_caja_izq, equalTo(pos_esperada_caja_izq));
+	    assertThat(pos_nueva_caja_der, equalTo(pos_esperada_caja_der));
+	    assertThat(pos_nueva_persona, equalTo(pos_esperada_persona));
 	}
 	
 	@Test
@@ -330,26 +277,19 @@ public class TestEmpujarCajas{
 		Persona persona = new Persona(3, 5);
 		persona.setEscenario(this.escenario);
 			    
-	    int x_original_caja_izq = caja_izq.getX();
-	    int y_original_caja_izq = caja_izq.getY();
-	    int x_original_caja_der = caja_der.getX();
-	    int y_original_caja_der = caja_der.getY();
-	    int x_original_persona = persona.getX();
-	    int y_original_persona = persona.getY();
-	    persona.moverArriba();
-	    int x_nuevo_caja_izq = caja_izq.getX();
-	    int y_nuevo_caja_izq = caja_izq.getY();
-	    int x_nuevo_caja_der = caja_der.getX();
-	    int y_nuevo_caja_der = caja_der.getY();
-	    int x_nuevo_persona = persona.getX();
-	    int y_nuevo_persona = persona.getY();
+		Posicion pos_esperada_caja_izq = caja_izq.getPosicion();
+		Posicion pos_esperada_caja_der = caja_der.getPosicion();
+		Posicion pos_esperada_persona = persona.getPosicion();
+	
+		persona.moverArriba();
+	    
+	    Posicion pos_nueva_caja_izq = caja_izq.getPosicion();
+	    Posicion pos_nueva_caja_der = caja_der.getPosicion();
+	    Posicion pos_nueva_persona = persona.getPosicion();
 
-	    assertEquals("la caja no se tiene que mover en x", x_original_caja_izq, x_nuevo_caja_izq);
-	    assertEquals("la caja no se tiene que mover en y", y_original_caja_izq, y_nuevo_caja_izq);
-	    assertEquals("la caja no se tiene que mover en x", x_original_caja_der, x_nuevo_caja_der);
-	    assertEquals("la caja no se tiene que mover en y", y_original_caja_der, y_nuevo_caja_der);
-	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
-	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	    assertThat(pos_nueva_caja_izq, equalTo(pos_esperada_caja_izq));
+	    assertThat(pos_nueva_caja_der, equalTo(pos_esperada_caja_der));
+	    assertThat(pos_nueva_persona, equalTo(pos_esperada_persona));
 	}
 	
 	@Test
@@ -365,25 +305,18 @@ public class TestEmpujarCajas{
 		Persona persona = new Persona(3, 2);
 		persona.setEscenario(this.escenario);
 			    
-	    int x_original_caja_izq = caja_izq.getX();
-	    int y_original_caja_izq = caja_izq.getY();
-	    int x_original_caja_der = caja_der.getX();
-	    int y_original_caja_der = caja_der.getY();
-	    int x_original_persona = persona.getX();
-	    int y_original_persona = persona.getY();
+		Posicion pos_esperada_caja_izq = caja_izq.getPosicion();
+		Posicion pos_esperada_caja_der = caja_der.getPosicion();
+		Posicion pos_esperada_persona = persona.getPosicion();
+		
 	    persona.moverAbajo();
-	    int x_nuevo_caja_izq = caja_izq.getX();
-	    int y_nuevo_caja_izq = caja_izq.getY();
-	    int x_nuevo_caja_der = caja_der.getX();
-	    int y_nuevo_caja_der = caja_der.getY();
-	    int x_nuevo_persona = persona.getX();
-	    int y_nuevo_persona = persona.getY();
+	    
+	    Posicion pos_nueva_caja_izq = caja_izq.getPosicion();
+	    Posicion pos_nueva_caja_der = caja_der.getPosicion();
+	    Posicion pos_nueva_persona = persona.getPosicion();
 
-	    assertEquals("la caja no se tiene que mover en x", x_original_caja_izq, x_nuevo_caja_izq);
-	    assertEquals("la caja no se tiene que mover en y", y_original_caja_izq, y_nuevo_caja_izq);
-	    assertEquals("la caja no se tiene que mover en x", x_original_caja_der, x_nuevo_caja_der);
-	    assertEquals("la caja no se tiene que mover en y", y_original_caja_der, y_nuevo_caja_der);
-	    assertEquals("la caja no se tiene que mover en x", x_original_persona, x_nuevo_persona);
-	    assertEquals("el tipito no se tiene que mover en y", y_original_persona, y_nuevo_persona);
+	    assertThat(pos_nueva_caja_izq, equalTo(pos_esperada_caja_izq));
+	    assertThat(pos_nueva_caja_der, equalTo(pos_esperada_caja_der));
+	    assertThat(pos_nueva_persona, equalTo(pos_esperada_persona));
 	}
 }
