@@ -1,5 +1,7 @@
 package ar.com.stomalab.souyaban.model.tests;
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -9,6 +11,7 @@ import ar.com.stomalab.souyaban.model.Destino;
 import ar.com.stomalab.souyaban.model.Escenario;
 import ar.com.stomalab.souyaban.model.Pared;
 import ar.com.stomalab.souyaban.model.Persona;
+import ar.com.stomalab.souyaban.model.Posicion;
 
 public class TestZonaLibre{
 	Escenario escenario;
@@ -53,14 +56,11 @@ public class TestZonaLibre{
 		
 		assertTrue(persona.puedeMoverseIzquierda());
 		
-		int x_original = persona.getX();
-		int y_original = persona.getY();
+		Posicion pos_esperada = persona.getPosicion().plus(new Posicion(-1, 0));
 		persona.moverIzquierda();
-		int x_nuevo = persona.getX();
-		int y_nuevo = persona.getY();
+		Posicion pos_nueva = persona.getPosicion();
 		
-		assertEquals("no se movio a la izquierda", x_original - 1, x_nuevo);
-		assertEquals("no se tiene que mover en y", y_original, y_nuevo);
+		assertThat(pos_nueva, equalTo(pos_esperada));
 	}
 	
 	@Test
@@ -71,15 +71,13 @@ public class TestZonaLibre{
 		
 		assertTrue(persona.puedeMoverseDerecha());
 		
-		int x_original = persona.getX();
-		int y_original = persona.getY();
+		Posicion pos_esperada = persona.getPosicion().plus(new Posicion(1, 0));
 		persona.moverDerecha();
-		int x_nuevo = persona.getX();
-		int y_nuevo = persona.getY();
-		
-		assertEquals("no se movio a la derecha", x_original + 1, x_nuevo);
-		assertEquals("no se tiene que mover en y", y_original, y_nuevo);
+		Posicion pos_nueva = persona.getPosicion();
+	
+		assertThat(pos_nueva, equalTo(pos_esperada));
 	}
+	
 	
 	@Test
 	public void test01A03MoverArribaLibre(){
@@ -89,14 +87,11 @@ public class TestZonaLibre{
 		
 		assertTrue(persona.puedeMoverseArriba());
 		
-		int x_original = persona.getX();
-		int y_original = persona.getY();
+		Posicion pos_esperada = persona.getPosicion().plus(new Posicion(0, -1));
 		persona.moverArriba();
-		int x_nuevo = persona.getX();
-		int y_nuevo = persona.getY();
-		
-		assertEquals("no se tiene que mover en x", x_original, x_nuevo);
-		assertEquals("no se movio arriba", y_original - 1, y_nuevo);
+		Posicion pos_nueva = persona.getPosicion();
+	
+		assertThat(pos_nueva, equalTo(pos_esperada));
 	}
 	
 	@Test
@@ -107,25 +102,10 @@ public class TestZonaLibre{
 		
 		assertTrue(persona.puedeMoverseAbajo());
 		
-		int x_original = persona.getX();
-		int y_original = persona.getY();
+		Posicion pos_esperada = persona.getPosicion().plus(new Posicion(0, 1));
 		persona.moverAbajo();
-		int x_nuevo = persona.getX();
-		int y_nuevo = persona.getY();
-		
-		assertEquals("no se tiene que mover en x", x_original, x_nuevo);
-		assertEquals("no se movio abajo", y_original + 1, y_nuevo);
+		Posicion pos_nueva = persona.getPosicion();
+	
+		assertThat(pos_nueva, equalTo(pos_esperada));
 	}
 }
-
-/*
-x_original = tipito.get_x
-y_original = tipito.get_y
-tipito.mover_izquierda
-x_nuevo = tipito.get_x
-y_nuevo = tipito.get_y
-
-assert_equal(x_original - 1, x_nuevo, "no se movio a la izquierda")
-assert_equal(y_original, y_nuevo, "no se tiene que mover en y")
-end
-*/
